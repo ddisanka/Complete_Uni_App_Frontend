@@ -1,0 +1,84 @@
+<div class="container">
+    <input id="addbtn" type="button" class="btn btn-primary" (click)="loadAddnew()" data-toggle="modal" data-target="#myModal" value="Add New Student">
+    <hr>
+    <h2>
+        Student Details
+    </h2>
+  
+    <table class="table" *ngIf="dataavailbale">
+      <thead>
+        <tr>
+          <th scope="col">Student Number</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Gender</th>
+          <th scope="col">DOB</th>
+          <th scope="col" style="align-content: center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of stdlist let i = index ">
+          <td scope="col">{{i+1}}</td>
+          <td scope="col">{{e.fname}}</td>
+          <td scope="col">{{e.lname}}</td>
+          <td scope="col">{{e.email}}</td>
+          <td scope="col">{{e.phone}}</td>
+          <td scope="col">{{e.gender=="1"?'Male':'Female'}}</td>
+          <td scope="col">{{e.dob}}</td>
+          <td style="display:none">{{e.id}}</td>
+          <td scope="col">
+            <button type="button" class="btn btn-default btn-primary" (click)="loadnewForm(e.id,e.email,e.fname,e.lname,e.gender,e.phone,e.dob)"
+              data-toggle="modal" data-target="#myModaledit">
+               Edit
+            </button>
+            |
+            <button type="button" class="btn btn-default btn-danger" (click)="deleteconfirmation(e.id)">
+               Delete
+            </button>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+  
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-primary">Student Add</h4>
+          </div>
+          <div class="modal-body">
+  
+  
+            <app-employee-add #stdadd (nameEvent)="RefreshData($event)"></app-employee-add>
+  
+          </div>
+          <div class="modal-footer">
+            <button type="button" #closeBtn class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  
+    <div id="myModaledit" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Edit</h4>
+          </div>
+          <div class="modal-body">
+            <app-student-update (nameEvent)="RefreshData($event)" [isReset]="resetForm" #regForm></app-student-update>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+  
+      </div>
+    </div>
