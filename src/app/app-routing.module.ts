@@ -4,11 +4,14 @@ import { AngularCRUDComponent } from './angular-crud/angular-crud.component';
 import { StudentUpdateComponent } from './student-update/student-update.component';
 
 import { StudentAddComponent } from './student-add/student-add.component';
+import { CourseCrudComponent } from './course-crud/course-crud.component';
 
-const routes: Routes = [{path:'',component:AngularCRUDComponent},
-{path:'Edit',component:StudentUpdateComponent},
-{path:'Add',component:StudentAddComponent},
-{path:'Home',component:AngularCRUDComponent}];
+const routes: Routes = 
+[
+  {path:'student',component:AngularCRUDComponent},
+  {path:'course',component:CourseCrudComponent}
+
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
